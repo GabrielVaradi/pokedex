@@ -1,6 +1,12 @@
-@import "./containers/Pokedex/Pokedex";
+
+// Components
+@import "./components/PokedexSides/LeftPokedex/LeftPokedex";
+@import "./components/PokedexSides/RightPokedex/RightPokedex";
 @import "./components/Pokemons/Pokemons";
 @import "./components/Pokemon/Pokemon";
+
+// Containers
+@import "./containers/Pokedex/Pokedex";
 
 
 
@@ -21,8 +27,4 @@
 
 .App-link {
   color: #61dafb;
-}
-
-.pokemonName {
-  text-transform: capitalize;
 }

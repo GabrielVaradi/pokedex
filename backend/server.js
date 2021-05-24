@@ -15,16 +15,12 @@ app.use("/api", express.static("../client/public")).listen(PORT, "0.0.0.0", "loc
 
 
 fetchPokemons = async () => {
-  let id
-  const pokemons = []
-  for (id = 1; id < 152; id++) {
-    const pokemon = await fetch(`https://pokeapi.co/api/v2/pokemon/${id}`)
-    .then(res => res.json())
-    .catch((error => {
-      console.error("Error: " + error)
-    }))
-    pokemons.push(pokemon)
-  }
+  const pokemons = await fetch("https://pokedex-99700-default-rtdb.firebaseio.com/pokemons/-MaPPwo7Ekb4qLDLo8h_.json")
+  .then(res => res.json())
+  .catch((error => {
+    console.error("Error: " + error)
+  }))
+
   return pokemons
 }
 
@@ -34,9 +30,6 @@ fetchPokemons()
       res.send(pokemons);
     });
   })
-
-
-
 
 
 // app.get("/api", (req, res) => {
