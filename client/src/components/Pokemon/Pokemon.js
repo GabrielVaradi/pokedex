@@ -19,7 +19,7 @@ const pokemon = (props) => {
     const renderStats = (stats) => {
         const allStats = stats.map(stat => {
             return (
-                <div className="pokemonStatDetail"> {stat.stat.name}: <strong> {stat.base_stat} </strong></div>
+                <div key={stat.stat.name} className="pokemonStatDetail"> {stat.stat.name}: <strong> {stat.base_stat} </strong></div>
             )
         })
         return allStats
@@ -28,7 +28,7 @@ const pokemon = (props) => {
     const renderTypes = (types) => {
         const allTypes = types.map(type => {
             return (
-                <div className="pokemonTypeDetail"> {type.type.name} </div>
+                <div key={type.type.name} className="pokemonTypeDetail"> {type.type.name} </div>
             )
         })
         return allTypes
@@ -37,7 +37,6 @@ const pokemon = (props) => {
     if (pokemon) {
         return (
             <div className="pokemonDetail">
-
                 <div className="pokemonCardDetail">
                     <div className="pokemonNameDetail"> {pokemon.name} </div>
                     <div className="pokemonSpritesDetail">
@@ -48,7 +47,6 @@ const pokemon = (props) => {
                         {renderTypes(pokemon.types)}
                     </div>
                 </div>
-
 
                 <div className="pokemonEvolutionsStatsDetail">
                     <div className="statsDetail">

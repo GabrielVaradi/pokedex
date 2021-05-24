@@ -76,8 +76,16 @@ class Pokedex extends Component {
     render() {
         return (
             <div className="pokedex">
-                <LeftPokedex pokemons={this.state.currentPagePokemons} inspectPokemon={this.inspectPokemon} nextPage={this.nextPage} previousPage={this.previousPage} />
-                <RightPokedex pokemons={this.state.pokemons} pokemon={this.state.inspectedPokemon} inspectPokemon={this.inspectPokemon}/>
+                <LeftPokedex pokemons={this.state.currentPagePokemons}
+                    inspectPokemon={this.inspectPokemon}
+                    nextPage={this.nextPage}
+                    previousPage={this.previousPage}
+                    />
+                <RightPokedex 
+                    pokemons={this.state.pokemons}
+                    pokemon={this.state.inspectedPokemon} 
+                    inspectPokemon={this.inspectPokemon}
+                    />
             </div>
 
         )
