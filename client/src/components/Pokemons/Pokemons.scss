@@ -4,19 +4,22 @@
     overflow: auto;
     display: flex;
     flex-direction: row;
+    flex-wrap: wrap;
 }
 
 .pokemonCard {
-    margin: 0 10px;
+    margin: 10px 10px;
     max-height: 85px;
+    border: none;
 
     .pokemon {
-        width: 65px;
-        height: 65px;
+        width: 80px;
+        height: 80px;
     }
     .pokemonName {
+        font-family: "Pokemon Pixel Font Regular";
         text-transform: capitalize;
-        font-size: 12px;
+        font-size: 16px;
     }
 
 }

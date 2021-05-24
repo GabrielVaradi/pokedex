@@ -4,7 +4,7 @@ import Pokemon from "../../Pokemon/Pokemon"
 const rightPokedex = (props) => (
     <div className="right">
         <div className="stats">
-            <Pokemon pokemon={props.pokemon} pokemons={props.pokemons}/>
+            <Pokemon pokemon={props.pokemon} pokemons={props.pokemons} inspectPokemon={props.inspectPokemon}/>
         </div>
         <div className="blueButtons1">
         <div className="blueButton"></div>

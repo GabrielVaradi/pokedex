@@ -1,8 +1,6 @@
 import React from 'react';
-import Pokemon from "../Pokemon/Pokemon"
 
 const pokemons = (props) => {
-    console.log(props.pokemons)
   return (
     <div className="Pokemons">
       {props.pokemons !== undefined ? 
@@ -19,7 +17,6 @@ const pokemons = (props) => {
             <div> Loading </div>}
     </div>
   )
-
 }
 
 export default pokemons;

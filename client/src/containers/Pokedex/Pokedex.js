@@ -8,6 +8,7 @@ class Pokedex extends Component {
         super(props);
         this.state = {
             pokemons: undefined,
+            currentPagePokemons: undefined,
             inspectedPokemon: undefined
         }
     }
@@ -17,9 +18,15 @@ class Pokedex extends Component {
     }
 
     callApi = () => {
-    fetch("http://localhost:3001")
-        .then(res => res.json())
-        .then(res => this.setState({ pokemons: res }));
+        fetch("http://localhost:3001")
+            .then(res => res.json())
+            .then(res => {
+                const currentPagePokemons = []
+                for (let i = 0; i < 6; i++) {
+                    currentPagePokemons.push(res[i])
+                }
+                this.setState({ pokemons: res, currentPagePokemons: currentPagePokemons })
+            })
     }
 
     inspectPokemon = (id) => {
@@ -28,14 +35,49 @@ class Pokedex extends Component {
             inspectedPokemon: inspectedPokemon[0]
         })
     }
-
     
+    previousPage = () => {
+        const firstPokemonIndex = this.state.pokemons.indexOf(this.state.currentPagePokemons[0])
+        const currentPagePokemons = []
+        let i
+
+        if (firstPokemonIndex === 0) {
+            for (i=this.state.pokemons.length-6; i < this.state.pokemons.length; i++) {
+                currentPagePokemons.push(this.state.pokemons[i])
+            }
+        } else {
+            for (i=firstPokemonIndex-6; i < firstPokemonIndex; i++) {
+                if (this.state.pokemons[i] !== undefined) {
+                    currentPagePokemons.push(this.state.pokemons[i])
+                }
+            }
+        }
+        this.setState({ currentPagePokemons: currentPagePokemons })
+    }
+
+    nextPage = () => {
+        const lastPokemonIndex = this.state.pokemons.indexOf(this.state.currentPagePokemons[this.state.currentPagePokemons.length-1])
+        const currentPagePokemons = []
+        let i
+        if (lastPokemonIndex === this.state.pokemons.length-1) {
+            for (i = 0; i < 6; i++) {
+                currentPagePokemons.push(this.state.pokemons[i])
+            }
+        } else {
+            for (i = lastPokemonIndex+1; i < lastPokemonIndex+7; i++) {
+                if (this.state.pokemons[i] !== undefined) {
+                    currentPagePokemons.push(this.state.pokemons[i])
+                }
+            }
+        }
+        this.setState({ currentPagePokemons: currentPagePokemons })
+    }
 
     render() {
         return (
             <div className="pokedex">
-                <LeftPokedex pokemons={this.state.pokemons} inspectPokemon={this.inspectPokemon}/>
-                <RightPokedex pokemons={this.state.pokemons} pokemon={this.state.inspectedPokemon}/>
+                <LeftPokedex pokemons={this.state.currentPagePokemons} inspectPokemon={this.inspectPokemon} nextPage={this.nextPage} previousPage={this.previousPage} />
+                <RightPokedex pokemons={this.state.pokemons} pokemon={this.state.inspectedPokemon} inspectPokemon={this.inspectPokemon}/>
             </div>
 
         )

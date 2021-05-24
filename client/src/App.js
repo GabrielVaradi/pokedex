@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import Pokedex from "./containers/Pokedex/Pokedex"
 import './App.scss';
 

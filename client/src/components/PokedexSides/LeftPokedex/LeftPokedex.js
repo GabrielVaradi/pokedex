@@ -27,7 +27,9 @@ const leftPokedex = (props) => (
         </div>
         <div className="picture">
 
+            <button onClick={props.previousPage}/>
             <Pokemons inspectPokemon={props.inspectPokemon} pokemons={props.pokemons}/>
+            <button onClick={props.nextPage}/>
 
         </div>
         <div className="buttonbottomPicture"></div>

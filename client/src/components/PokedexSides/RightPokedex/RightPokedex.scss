@@ -55,20 +55,23 @@
 
 .stats
     {
-        height: 175.5px;
-        width: 375px;
+        height: 225.5px;
+        width: 422px;
         padding: 13.5px;
         background-color: #30da0c;
         z-index: 1;
         font-size: 14.04px;
-        font-family: arial, sans-serif;
-
         position: absolute;
-        top: 175.5px;
-        left: 33.75px;
-
+        top: 136.5px;
+        left: 12.75px;
         border-radius: 20.25px;
         box-shadow: 0 0 27px #003300 inset;
+    }
+
+.statsTitle 
+    {
+        margin-top: 20%;
+        font-size: 40px;
     }
 
 .blueButtons1

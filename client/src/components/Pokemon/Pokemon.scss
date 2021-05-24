@@ -1,0 +1,70 @@
+.pokemonDetail 
+    {
+        display: flex;
+        flex-direction: row;
+    }
+
+.pokemonCardDetail
+    {
+        display: flex;
+        flex-direction: column;
+        border-right: 1px solid grey;
+    }
+
+.pokemonSpritesDetail
+    {
+        display: flex;
+        flex-direction: row;
+        margin-top: 15px;
+    }
+
+.pokemonNameDetail
+    {
+        text-transform: uppercase;
+        margin-top: 20px;
+        font-size: 36px;
+    }
+
+.pokemonStatsDetail 
+    {
+        display: flex;
+        flex-direction: column;
+    }
+
+.pokemonStatDetail 
+    {
+        text-transform: capitalize;
+        font-size: 18px;
+    }
+
+.pokemonTypesDetail 
+    {
+        font-size: 20px;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-evenly;
+    }
+
+.pokemonTypeDetail 
+    {
+        text-transform: capitalize;
+    }
+
+.pokemonEvolutionsStatsDetail
+    {
+        display: flex;
+        flex-direction: column;
+    }
+
+.pokemonEvolutionsDetail
+    {
+        margin-top: 20px;
+        display: flex;
+        flex-direction: row;
+    }
+
+.pokemonEvolutionDetail
+    {
+        display: flex;
+        flex-direction: column;
+    }

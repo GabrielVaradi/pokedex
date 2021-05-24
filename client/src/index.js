@@ -1,5 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import './fonts/pokemon_pixel_font.ttf'
 import './index.scss';
 import App from './App';
 

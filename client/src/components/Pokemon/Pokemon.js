@@ -15,34 +15,77 @@ const pokemon = (props) => {
             evolves_into = pokemons.filter(singlePokemon => singlePokemon.name === pokemon.evolutions.evolves_into)[0]   
         }
     }
-    // Stats, type, 2-4 sprites, name, evolution, devolution
+
+    const renderStats = (stats) => {
+        const allStats = stats.map(stat => {
+            return (
+                <div className="pokemonStatDetail"> {stat.stat.name}: <strong> {stat.base_stat} </strong></div>
+            )
+        })
+        return allStats
+    }
+
+    const renderTypes = (types) => {
+        const allTypes = types.map(type => {
+            return (
+                <div className="pokemonTypeDetail"> {type.type.name} </div>
+            )
+        })
+        return allTypes
+    }
 
     if (pokemon) {
         return (
-            <React.Fragment>
-                <div> {pokemon.name} </div>
-                <div> {pokemon.types[0].type.name} </div>
-                <div> {pokemon.stats[0].stat.name} {pokemon.stats[0].base_stat}</div>
-                <img src={pokemon.sprites.back_default} alt={pokemon.name}/>
-                <img src={pokemon.sprites.front_default} alt={pokemon.name}/>
-                { pokemon.evolutions && pokemon.evolutions.evolves_from ?
-                <React.Fragment>
-                    <div> Evolves from </div>
-                    <img src={evolves_from.sprites.front_default} alt={evolves_from.name}/>
-                </React.Fragment>
-                : ""}
-                { pokemon.evolutions && pokemon.evolutions.evolves_into ? 
-                <React.Fragment>
-                    <div> Evolves into </div>
-                    <img src={evolves_into.sprites.front_default} alt={evolves_into.name}/>
-                </React.Fragment>
-                : ""
-                }
-            </React.Fragment>
+            <div className="pokemonDetail">
+
+                <div className="pokemonCardDetail">
+                    <div className="pokemonNameDetail"> {pokemon.name} </div>
+                    <div className="pokemonSpritesDetail">
+                        <img  style={{width:"110px"}} src={pokemon.sprites.back_default} alt={pokemon.name}/>
+                        <img  style={{width:"110px"}} src={pokemon.sprites.front_default} alt={pokemon.name}/>
+                    </div>
+                    <div className="pokemonTypesDetail">
+                        {renderTypes(pokemon.types)}
+                    </div>
+                </div>
+
+
+                <div className="pokemonEvolutionsStatsDetail">
+                    <div className="statsDetail">
+                        {renderStats(pokemon.stats)}
+                    </div>
+                    <div className="pokemonEvolutionsDetail">
+                        <div className="pokemonEvolutionDetail">
+                            <div style={{fontSize: "18px"}}> Evolves from </div>
+                            { pokemon.evolutions && pokemon.evolutions.evolves_from ?
+                            <button onClick={() => props.inspectPokemon(evolves_from.id)} style={{border:"none", background:"none"}}>
+                                <img src={evolves_from.sprites.front_default} alt={evolves_from.name}/>
+                            </button>
+                            : 
+                            <div>
+                                <img src={"/nothing.png"} alt="nothing" /> 
+                            </div>
+                            }
+                        </div>
+                        <div className="pokemonEvolutionDetail">
+                            <div style={{fontSize: "18px"}}> Evolves into</div>
+                            { pokemon.evolutions && pokemon.evolutions.evolves_into ? 
+                            <button onClick={() => props.inspectPokemon(evolves_into.id)} style={{border:"none", background:"none"}}>
+                                <img src={evolves_into.sprites.front_default} alt={evolves_into.name}/>
+                            </button>
+                            : 
+                            <div>
+                                <img src={"/nothing.png"} alt="nothing" /> 
+                            </div>
+                            }
+                        </div>
+                    </div>
+                </div>
+            </div>
         )
     } else {
         return (
-            <div> Click on a pokemon to inspect it! </div>
+            <div className="statsTitle"> Click on a pokemon to inspect it! </div>
         )
     }
 
