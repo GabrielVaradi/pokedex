@@ -10,9 +10,9 @@ const leftPokedex = (props) => (
         <div className="buttonGlass">
             <div className="reflect"> </div>
         </div>
-        <div className="miniButtonGlass1"></div>
-        <div className="miniButtonGlass2"></div>
-        <div className="miniButtonGlass3"></div>
+        <div className="miniButtonGlassLeft miniButtonGlass1"></div>
+        <div className="miniButtonGlassLeft miniButtonGlass2"></div>
+        <div className="miniButtonGlassLeft miniButtonGlass3"></div>
         </div>
         <div className="curve2_left">
         <div className="junction">
@@ -39,23 +39,23 @@ const leftPokedex = (props) => (
         </div>
         </div>
         <div className="bigbluebutton"></div>
-        <div className="barbutton1"></div>
-        <div className="barbutton2"></div>
+        <div className="barbuttonLeft barbutton1"></div>
+        <div className="barbuttonLeft barbutton2"></div>
         <div className="cross">
-        <div className="leftcross">
-            <div className="leftT"></div>
+        <div className="crosses leftcross">
+            <div className="t leftT"></div>
         </div>
-        <div className="topcross">
-            <div className="upT"></div>
+        <div className="crosses topcross">
+            <div className="t upT"></div>
         </div>
-        <div className="rightcross">
-            <div className="rightT"></div>
+        <div className="crosses rightcross">
+            <div className="t rightT"></div>
         </div>
-        <div className="mclassNamecross">
-            <div className="mclassNameCircle"></div>
+        <div className="midcross">
+            <div className="midCircle"></div>
         </div>
-        <div className="botcross">
-            <div className="downT"></div>
+        <div className="crosses botcross">
+            <div className="t downT"></div>
         </div>
         </div>
     </div>

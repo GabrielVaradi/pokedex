@@ -17,7 +17,6 @@ const pokemon = (props) => {
     }
     // Stats, type, 2-4 sprites, name, evolution, devolution
 
-    console.log(evolves_from)
     if (pokemon) {
         return (
             <React.Fragment>
