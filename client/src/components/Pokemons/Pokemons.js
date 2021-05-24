@@ -14,7 +14,7 @@ const pokemons = (props) => {
                 </button>
             )
         }) :
-            <div> Loading </div>}
+            <div className="loading"> Loading </div>}
     </div>
   )
 }
