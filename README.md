@@ -9,3 +9,4 @@ To run it :
 - Open another terminal window, navigate to the "client" folder and type "**npm install**" then "**npm start**".
 - Go to localhost:3000 in your browser.
 - Enjoy!
+- (If the pokedex is stuck on loading, refresh the page. The server takes 10-15 seconds to boot)

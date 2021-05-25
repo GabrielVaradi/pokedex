@@ -1,7 +1,6 @@
 const express = require("express");
 const cors = require("cors")
 const fetch = require("node-fetch");
-// require("dotenv").config()
 
 const app = express();
 const PORT = process.env.PORT || 3001;
@@ -30,11 +29,3 @@ fetchPokemons()
       res.send(pokemons);
     });
   })
-
-
-// app.get("/api", (req, res) => {
-//   res.sendFile("../client/public");
-// });
-
-  
-
