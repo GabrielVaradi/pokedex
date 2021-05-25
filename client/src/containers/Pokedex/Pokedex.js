@@ -9,7 +9,8 @@ class Pokedex extends Component {
         this.state = {
             pokemons: undefined,
             currentPagePokemons: undefined,
-            inspectedPokemon: undefined
+            inspectedPokemon: undefined,
+            filteredPokemons: undefined
         }
     }
 
@@ -25,7 +26,7 @@ class Pokedex extends Component {
                 for (let i = 0; i < 6; i++) {
                     currentPagePokemons.push(res[i])
                 }
-                this.setState({ pokemons: res, currentPagePokemons: currentPagePokemons })
+                this.setState({ pokemons: res, currentPagePokemons: currentPagePokemons, filteredPokemons: res })
             })
     }
 
@@ -37,18 +38,21 @@ class Pokedex extends Component {
     }
     
     previousPage = () => {
-        const firstPokemonIndex = this.state.pokemons.indexOf(this.state.currentPagePokemons[0])
+        const pokemons = this.state.filteredPokemons
+        const firstPokemonIndex = pokemons.indexOf(this.state.currentPagePokemons[0])
         const currentPagePokemons = []
         let i
 
         if (firstPokemonIndex === 0) {
-            for (i=this.state.pokemons.length-6; i < this.state.pokemons.length; i++) {
-                currentPagePokemons.push(this.state.pokemons[i])
+            for (i=pokemons.length-6; i < pokemons.length; i++) {
+                if (pokemons[i] !== undefined) {
+                    currentPagePokemons.push(pokemons[i])
+                }
             }
         } else {
             for (i=firstPokemonIndex-6; i < firstPokemonIndex; i++) {
-                if (this.state.pokemons[i] !== undefined) {
-                    currentPagePokemons.push(this.state.pokemons[i])
+                if (pokemons[i] !== undefined) {
+                    currentPagePokemons.push(pokemons[i])
                 }
             }
         }
@@ -56,21 +60,38 @@ class Pokedex extends Component {
     }
 
     nextPage = () => {
-        const lastPokemonIndex = this.state.pokemons.indexOf(this.state.currentPagePokemons[this.state.currentPagePokemons.length-1])
-        const currentPagePokemons = []
+        const pokemons = this.state.filteredPokemons
+        const lastPokemonIndex = pokemons.indexOf(this.state.currentPagePokemons[this.state.currentPagePokemons.length-1])
+        let currentPagePokemons = []
         let i
-        if (lastPokemonIndex === this.state.pokemons.length-1) {
+        if (lastPokemonIndex === pokemons.length-1) {
             for (i = 0; i < 6; i++) {
-                currentPagePokemons.push(this.state.pokemons[i])
+                if (pokemons[i] !== undefined) {
+                    currentPagePokemons.push(pokemons[i])
+                }
             }
-        } else {
+        } 
+        else {
             for (i = lastPokemonIndex+1; i < lastPokemonIndex+7; i++) {
-                if (this.state.pokemons[i] !== undefined) {
-                    currentPagePokemons.push(this.state.pokemons[i])
+                if (pokemons[i] !== undefined) {
+                    currentPagePokemons.push(pokemons[i])
                 }
             }
         }
         this.setState({ currentPagePokemons: currentPagePokemons })
+    }
+
+    filterPokemons = (event) => {
+        const filteredPokemons = this.state.pokemons.filter(pokemon => pokemon.name.includes(event.target.value))
+        const currentPagePokemons = []
+                for (let i = 0; i < 6; i++) {
+                    if (filteredPokemons[i] !== undefined) {
+                        currentPagePokemons.push(filteredPokemons[i])
+                    }
+                }
+        this.setState({
+            currentPagePokemons: currentPagePokemons, filteredPokemons: filteredPokemons
+        })
     }
 
     render() {
@@ -80,6 +101,7 @@ class Pokedex extends Component {
                     inspectPokemon={this.inspectPokemon}
                     nextPage={this.nextPage}
                     previousPage={this.previousPage}
+                    filterPokemons={this.filterPokemons}
                     />
                 <RightPokedex 
                     pokemons={this.state.pokemons}

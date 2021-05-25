@@ -26,7 +26,12 @@ const leftPokedex = (props) => (
             <div className="buttontopPicture2"></div>
         </div>
         <div className="picture">
-
+            <div className="searchContainer">
+                <input className="searchBar" type="text" placeholder="Search a pokemon!" onKeyUp={props.filterPokemons}/>
+                <div className="searchIcon">
+                    <i className="fa fa-search" />
+                </div>
+            </div>
             <button className="arrow leftArrow" onClick={props.previousPage}/>
             <Pokemons inspectPokemon={props.inspectPokemon} pokemons={props.pokemons}/>
             <button className="arrow rightArrow" onClick={props.nextPage}/>
