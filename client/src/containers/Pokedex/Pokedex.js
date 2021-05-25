@@ -82,7 +82,7 @@ class Pokedex extends Component {
     }
 
     filterPokemons = (event) => {
-        const filteredPokemons = this.state.pokemons.filter(pokemon => pokemon.name.includes(event.target.value))
+        const filteredPokemons = this.state.pokemons.filter(pokemon => pokemon.name.includes(event.target.value.toLowerCase()))
         const currentPagePokemons = []
                 for (let i = 0; i < 6; i++) {
                     if (filteredPokemons[i] !== undefined) {
