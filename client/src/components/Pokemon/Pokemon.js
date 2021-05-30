@@ -5,7 +5,8 @@ const pokemon = (props) => {
     const styles = {
         sprite: {width:"110px"},
         button: {border:"none", background:"none"},
-        evolveText: {fontSize: "18px"}
+        evolveText: {fontSize: "18px"},
+        evolutionSpriteArray: {width:"40px"}
     }
 
     const pokemon = props.pokemon
@@ -18,7 +19,14 @@ const pokemon = (props) => {
             evolves_from = pokemons.filter(singlePokemon => singlePokemon.name === pokemon.evolutions.evolves_from)[0]
         }
         if(pokemon.evolutions.evolves_into) {
-            evolves_into = pokemons.filter(singlePokemon => singlePokemon.name === pokemon.evolutions.evolves_into)[0]   
+            if (pokemon.evolutions.evolves_into && Array.isArray(pokemon.evolutions.evolves_into)) {
+                evolves_into = []
+                pokemon.evolutions.evolves_into.forEach(evolution => {
+                    evolves_into.push(pokemons.filter(singlePokemon => singlePokemon.name === evolution))
+                })
+            } else {
+                evolves_into = pokemons.filter(singlePokemon => singlePokemon.name === pokemon.evolutions.evolves_into)[0]   
+            }
         }
     }
 
@@ -38,6 +46,45 @@ const pokemon = (props) => {
             )
         })
         return allTypes
+    }
+
+    const renderEvolvesInto = (evolution) => {
+        if (Array.isArray(evolution)) {
+            return (
+                <div className="pokemonEvolutionsArray">
+                    {evolution.map(evo => {
+                        return (
+                            <button key={evo[0].id} onClick={() => props.inspectPokemon(evo[0].id)} style={styles.button}>
+                                <img src={evo[0].sprites.front_default} alt={evo[0].name} style={styles.evolutionSpriteArray}/>
+                            </button> 
+                        )
+                    })}
+                </div>
+                    )
+        } else {
+            return (
+                <button onClick={() => props.inspectPokemon(evolution.id)} style={styles.button}>
+                    <img src={evolution.sprites.front_default} alt={evolution.name}/>
+                </button>
+            )
+
+        }
+    }
+
+    const renderEvolvesFrom = (evolution) => {
+        return (
+            <button onClick={() => props.inspectPokemon(evolution.id)} style={styles.button}>
+                <img src={evolution.sprites.front_default} alt={evolution.name}/>
+            </button>
+        )
+    }
+
+    const renderNothing = () => {
+        return (
+            <div>
+                <img src={"/nothing.png"} alt="nothing" /> 
+            </div>
+        )
     }
 
     if (pokemon) {
@@ -61,26 +108,18 @@ const pokemon = (props) => {
                     <div className="pokemonEvolutionsDetail">
                         <div className="pokemonEvolutionDetail">
                             <div style={styles.evolveText}> Evolves from </div>
-                            { pokemon.evolutions && pokemon.evolutions.evolves_from ?
-                            <button onClick={() => props.inspectPokemon(evolves_from.id)} style={styles.button}>
-                                <img src={evolves_from.sprites.front_default} alt={evolves_from.name}/>
-                            </button>
+                            { pokemon.evolutions && evolves_from ?
+                                renderEvolvesFrom(evolves_from)
                             : 
-                            <div>
-                                <img src={"/nothing.png"} alt="nothing" /> 
-                            </div>
+                                renderNothing()
                             }
                         </div>
                         <div className="pokemonEvolutionDetail">
                             <div style={styles.evolveText}> Evolves into</div>
-                            { pokemon.evolutions && pokemon.evolutions.evolves_into ? 
-                            <button onClick={() => props.inspectPokemon(evolves_into.id)} style={styles.button}>
-                                <img src={evolves_into.sprites.front_default} alt={evolves_into.name}/>
-                            </button>
+                            { pokemon.evolutions && evolves_into ? 
+                                renderEvolvesInto(evolves_into)
                             : 
-                            <div>
-                                <img src={"/nothing.png"} alt="nothing" /> 
-                            </div>
+                                renderNothing()
                             }
                         </div>
                     </div>

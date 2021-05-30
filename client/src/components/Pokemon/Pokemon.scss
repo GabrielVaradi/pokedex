@@ -68,3 +68,10 @@
         display: flex;
         flex-direction: column;
     }
+
+.pokemonEvolutionsArray 
+    {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+    }
